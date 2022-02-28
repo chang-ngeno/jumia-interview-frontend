@@ -1,0 +1,26 @@
+<div class="container">
+    <table id="table" data-toggle="table" data-search="true" data-filter-control="true" data-show-export="true"
+        data-click-to-select="true" data-toolbar="#toolbar" class="table table-responsive table-striped table-hover">
+        <caption class="caption">List of phones contacts</caption>
+        <thead>
+            <tr>
+                <th scope="row" data-field="prenom" data-filter-control="input" data-sortable="true">#</th>
+                <th scope="row">Customer Name</th>
+                <th scope="row">Phone Number</th>
+                <th scope="row">Country</th>
+                <th scope="row">Country Code</th>
+                <th scope="row">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let phone of phoneListData?.data">
+                <th scope="col">{{ phone.customer?.cid }}</th>
+                <td>{{ phone.customer?.customerName }}</td>
+                <td>{{ phone.customer?.customerPhone }}</td>
+                <td>{{ phone.country?.countryName }}</td>
+                <td>{{ phone.country?.countryCode}}</td>
+                <td>{{ phone.validString }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

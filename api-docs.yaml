@@ -1,0 +1,220 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://127.0.0.1:8080
+  description: Generated server url
+paths:
+  /api/v1/phones:
+    get:
+      tags:
+      - phone-rest-controller
+      operationId: fetchAllPhones
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResultListPhoneDetailDTO'
+  /api/v1/phones/pageable:
+    get:
+      tags:
+      - phone-rest-controller
+      operationId: fetchAllPhonesPageable
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          default: cId
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResultPagePhoneDetailDTO'
+  /api/v1/countries:
+    get:
+      tags:
+      - phone-rest-controller
+      operationId: fetchAllCountries
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResultListCountryInformation'
+  /api/v1/:
+    get:
+      tags:
+      - phone-rest-controller
+      operationId: fetchAllContacts
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataResultListContact'
+  /:
+    get:
+      tags:
+      - test-rest-controller
+      operationId: testApiInterface
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    Contact:
+      type: object
+      properties:
+        customerName:
+          type: string
+        customerPhone:
+          type: string
+        cid:
+          type: integer
+          format: int32
+    CountryInformation:
+      type: object
+      properties:
+        countryName:
+          type: string
+        countryCode:
+          type: string
+        phonePattern:
+          type: string
+    DataResultListPhoneDetailDTO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneDetailDTO'
+    PhoneDetailDTO:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Contact'
+        country:
+          $ref: '#/components/schemas/CountryInformation'
+        valid:
+          type: boolean
+    DataResultPagePhoneDetailDTO:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          $ref: '#/components/schemas/PagePhoneDetailDTO'
+    PagePhoneDetailDTO:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        sort:
+          $ref: '#/components/schemas/Sort'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneDetailDTO'
+        number:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        offset:
+          type: integer
+          format: int64
+    Sort:
+      type: object
+      properties:
+        unsorted:
+          type: boolean
+        sorted:
+          type: boolean
+        empty:
+          type: boolean
+    DataResultListCountryInformation:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryInformation'
+    DataResultListContact:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
