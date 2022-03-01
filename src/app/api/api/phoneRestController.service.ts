@@ -39,7 +39,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PhoneRestControllerService {
 
-    protected basePath = environment.apiURL;
+    protected basePath = environment.apiUrl;
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
