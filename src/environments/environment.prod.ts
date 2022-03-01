@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: process.env["API_BASE_URL"]
+  apiUrl: "http://127.0.0.1:8481"
 };
