@@ -30,6 +30,7 @@ import { DataResultPagePhoneDetailDTO } from '../model/dataResultPagePhoneDetail
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -38,7 +39,7 @@ import { Configuration }                                     from '../configurat
 })
 export class PhoneRestControllerService {
 
-    protected basePath = 'http://127.0.0.1:8080';
+    protected basePath = environment.apiURL;
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;

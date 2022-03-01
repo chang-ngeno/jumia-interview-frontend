@@ -1,5 +1,5 @@
 #### Stage 1: Build the angular application
-FROM node as build
+FROM node:lts-alpine as build
  
 # Configure the main working directory inside the docker image. 
 # This is the base directory used in any further RUN, COPY, and ENTRYPOINT 
@@ -29,8 +29,9 @@ FROM nginx
 COPY --from=build /app/dist/out/ /usr/share/nginx/html
  
 # Copy our custom nginx config
-COPY /front-end/nginx-custom.conf /etc/nginx/conf.d/default.conf
- 
+COPY /nginx-custom.conf /etc/nginx/conf.d/default.conf
+
+ARG API_BASE_URL: http://127.0.0.1:8481/
  
 # Expose port 8480 to the Docker host, so we can access it 
 # from the outside.
