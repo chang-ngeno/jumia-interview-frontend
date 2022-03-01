@@ -1,5 +1,5 @@
 #### Stage 1: Build the angular application
-FROM node:lts-alpine as build
+FROM node as build
  
 # Configure the main working directory inside the docker image. 
 # This is the base directory used in any further RUN, COPY, and ENTRYPOINT 
